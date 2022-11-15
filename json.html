@@ -1,0 +1,33 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <style>
+        h2{text-align: center;}
+        #container {max-width: 600px; width:100%;  margin: 0 auto;}
+        .data{margin: 10px; padding:10px 30px; background-color: rgb(217, 203, 231); text-align: center;}
+    </style>
+</head>
+<body>
+    <h2>공공데이터를활용지원센터_코로나19 예방접종센터 현황</h2>
+    <div id="container"></div>
+    
+</body>
+<script>
+    const resultDisplay = document.getElementById('container');
+    const url =
+        "https://api.odcloud.kr/api/15077586/v1/centers?page=1&perPage=10&serviceKey=tFwL%2FWQhmOt0VtMKqrGETyKsPGhkkiVBb8%2Fx%2BstTyQ%2F9SRVb4s6wD1HlMbsUOIhbm7bedx5dStmFPFAeZ2FAqg%3D%3D";
+        const output = [ ];
+        fetch(url)
+        .then((response) => response.json())
+        .then((myJson) => myJson.data.forEach(
+            (current) => { 
+            output.push(`<div class="data"> address: ${current.address},<br> centerName: ${current.centerName}, <br>facilityName: ${current.facilityName}</div>`);
+            resultDisplay.innerHTML = output.join(' '); 
+        }));
+</script>
+</html>
